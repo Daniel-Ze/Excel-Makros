@@ -1,0 +1,174 @@
+'VBA Makro to change the output of FGENESH to the Genebank file format for easy annotation of sequences
+'
+'Reference FGENESH:  Solovyev V, Kosarev P, Seledsov I, Vorobyev D. Automatic annotation of eukaryotic genes,
+'                   pseudogenes and promoters. Genome Biol. 2006,7, Suppl 1: P. 10.1-10.12.
+'
+'Website: http://www.softberry.com/berry.phtml?topic=fgenesh&group=programs&subgroup=gfind
+'
+
+Sub FGENESHtoGBK()
+"Columns(""F"").Delete"
+"Columns(""F"").Delete"
+"Columns(""F"").Delete"
+"Columns(""I"").Delete"
+
+Dim Count As Integer, aCount As Integer, bCount As Integer
+Dim Sp1 As String, Sp2 As String, PP As String, trenn As String
+Dim Num As Integer, hkom, cCount As Integer, dCount As Integer
+Dim b As Integer, Trenner As String, Str As String, Str1 As String
+Dim Defi As String
+
+Defi = 1
+Num = 1
+Count = 1
+aCount = 1
+bCount = 2
+cCount = 1
+dCount = 1
+"PP = "".."""
+"trenn = ""     """
+"Trenner = "","""
+"hkom = """""""""
+'Stop
+
+"Defi = InputBox(""Anzahl der Zeilen Eingeben:"")"
+Do While aCount < Defi
+"    If Not Cells(aCount, 1) = """" Then"
+        aCount = aCount + 1
+    Else
+        Rows(aCount).Delete
+        aCount = aCount + 1
+    End If
+Loop
+
+aCount = 1
+Defi = 1
+
+"Do While Not Cells(aCount, 1) = """""
+    aCount = aCount + 1
+    Defi = Defi + 1
+Loop
+
+aCount = 1
+
+"Do While Not Cells(aCount, 1) = """""
+
+    Do While Cells(aCount, 1) = Cells(bCount, 1)
+        bCount = bCount + 1
+        Count = Count + 1
+    Loop
+
+    dCount = bCount - 1
+"    Cells(cCount, 10) = trenn & ""RNA"""
+    Sp1 = Cells(aCount, 5)
+    Sp2 = Cells(dCount, 5)
+
+"    If Cells(aCount, 2) = ""+"" Then"
+            Cells(cCount, 11) = trenn & Sp1 & PP & Sp2
+        Else
+"            Cells(cCount, 11) = trenn & ""complement("" & Sp1 & PP & Sp2 & "")"""
+    End If
+
+    cCount = cCount + 1
+"    Cells(cCount, 11) = trenn & ""        /RNA="" & hkom & ""FGENESH-"" & Num & hkom"
+
+    Num = Num + 1
+    cCount = cCount + 1
+    aCount = aCount + Count
+    Count = 0
+Loop
+
+aCount = 1
+Count = 1
+cCount = 1
+bCount = 1
+dCount = 2
+
+Do While aCount < Defi
+"    If Cells(aCount, 6) = """" Then"
+            aCount = aCount + 1
+        Else
+            Sp1 = Cells(aCount, 6)
+            Sp2 = Cells(aCount, 8)
+            Cells(aCount, 9) = Sp1 & PP & Sp2
+            aCount = aCount + 1
+    End If
+Loop
+
+'Stop
+"Columns(""F"").Delete"
+"Columns(""F"").Delete"
+"Columns(""F"").Delete"
+
+Count = 1
+Num = 1
+aCount = 1
+
+'Stop
+
+Do While dCount < Defi
+
+"    If Not Cells(dCount, 6) = """" Then"
+        Str = Cells(dCount, 6)
+"        Cells(Count, 9) = ""     CDS"""
+        dCount = dCount + 1
+
+"        Do While Not Cells(dCount, 6) = """""
+            Str = Str & Trenner & Cells(dCount, 6)
+            dCount = dCount + 1
+            aCount = aCount + 1
+        Loop
+
+        'MsgBox (Str & dCount)
+        'Stop
+
+    End If
+
+    If aCount > 1 Then
+"        If Cells(dCount, 2) = ""+"" Then"
+"                Cells(Count, 10) = ""     join("" & Str & "")"""
+                Count = Count + 1
+            Else
+"                Cells(Count, 10) = ""     complement(join("" & Str & ""))"""
+                Count = Count + 1
+        End If
+    Else
+"            If Cells(dCount, 2) = ""+"" Then"
+"                Cells(Count, 10) = ""     "" & Str"
+                Count = Count + 1
+            Else
+"                Cells(Count, 10) = ""     complement("" & Str & "")"""
+                Count = Count + 1
+            End If
+    End If
+
+    'Stop
+"    Cells(Count, 10) = ""             /CDS="" & hkom & ""FGENESH-"" & Num & hkom"
+    'Stop
+"    'MsgBox (dCount & ""  "" & aCount & ""  "" & Count & ""  "" & Num)"
+    'Stop
+    Num = Num + 1
+    Count = Count + 1
+    aCount = 1
+    dCount = dCount + 2
+"    'MsgBox (dCount & ""  "" & aCount & ""  "" & Count & ""  "" & Num)"
+Loop
+aCount = 1
+cCount = 2
+dCount = 3
+
+"Do While Not Cells(aCount, 7) = """""
+    
+    Range(Cells(dCount, 7), Cells(dCount, 8)).Select
+    Selection.Insert Shift:=xlDown
+    Selection.Insert Shift:=xlDown
+    Range(Cells(aCount, 9), Cells(cCount, 10)).Select
+    Selection.Cut
+    Cells(dCount, 7).Select
+    ActiveSheet.Paste
+    dCount = dCount + 4
+    aCount = aCount + 2
+    cCount = cCount + 2
+Loop
+
+End Sub
