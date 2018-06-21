@@ -4,7 +4,7 @@
 'Reference Conserved Domain Search: Marchler-Bauer A, Bo Y, Han L, He J, Lanczycki CJ, Lu S, Chitsaz F, Derbyshire MK, Geer RC, 
 '                                   Gonzales NR, Gwadz M, Hurwitz DI, Lu F, Marchler GH, Song JS, Thanki N, Wang Z, Yamashita RA, 
 '                                   Zhang D, Zheng C, Geer LY, Bryant SH. CDD/SPARCLE: functional classification of proteins via 
-"'                                   subfamily domain architectures. Nucleic Acids Res. 2017 Jan 4;45(D1):D200-D203. "
+'                                   subfamily domain architectures. Nucleic Acids Res. 2017 Jan 4;45(D1):D200-D203. 
 '                                   doi: 10.1093/nar/gkw1129. Epub 2016 Nov 29.
 '
 'Website: https://www.ncbi.nlm.nih.gov/Structure/cdd/wrpsb.cgi
@@ -14,31 +14,31 @@ Dim aCount As Integer, bCount As Integer, i As Integer, f As Integer
 Dim PP As String, Sp1 As String, Sp2 As String, Kette As String
 Dim domain As String, note As String, hochkomma As String, Trenner As String
 
-"domain = ""             /label="""""""
-"note1 = ""             /note="""""""
-"note2 = ""             /note=""""e-value """
-"hochkomma = """""""""
-"PP = "".."""
-"Trenner = ""     """
+domain = "             /label="""
+note1 = "             /note="""
+note2 = "             /note=""e-value "
+hochkomma = """"
+PP = ".."
+Trenner = "     "
 aCount = 1
 bCount = 1
 i = 1
 f = 1
 
-"'Columns(""E"").Delete"
+'Columns("E").Delete
 
 'Trennen der Possitionsangabe
-"Columns(""A"").Insert Shift:=xlToRight"
-"Columns(""A"").Insert Shift:=xlToRight"
-"Columns(""G"").Insert Shift:=xlToRight"
-"Columns(""G"").Insert Shift:=xlToRight"
-"Columns(""F"").Select"
-"    Selection.TextToColumns Destination:=Range(""G1""), DataType:=xlDelimited, _"
-"        TextQualifier:=xlDoubleQuote, Other:=True, OtherChar:=""-"""
+Columns("A").Insert Shift:=xlToRight
+Columns("A").Insert Shift:=xlToRight
+Columns("G").Insert Shift:=xlToRight
+Columns("G").Insert Shift:=xlToRight
+Columns("F").Select
+    Selection.TextToColumns Destination:=Range("G1"), DataType:=xlDelimited, _
+        TextQualifier:=xlDoubleQuote, Other:=True, OtherChar:="-"
 
 
-'Zusammenfügen der Possitionsangabe und verschieben in Spalte B
-"Do While Not Cells(bCount, 3) = """""
+'ZusammenfÃ¼gen der Possitionsangabe und verschieben in Spalte B
+Do While Not Cells(bCount, 3) = ""
     Sp1 = Cells(aCount, 7).Value
     Sp2 = Cells(aCount, 8).Value
     Kette = Trenner & Sp1 & PP & Sp2
@@ -49,16 +49,16 @@ f = 1
 Loop
 
 'Entfernen getrennten Zelleninhalte
-"Columns(""F:H"").Delete"
+Columns("F:H").Delete
 
-'Zürcksetzen der Zählvariablen für die Do Schleife
+'ZÃ¼rcksetzen der ZÃ¤hlvariablen fÃ¼r die Do Schleife
 aCount = 1
 bCount = 1
 
-'Einfügen von Leerzeilen und Kopieren der Angaben in Spalte B mit den
+'EinfÃ¼gen von Leerzeilen und Kopieren der Angaben in Spalte B mit den
 'Bezeichnungen /domain= und /note=
-"Do While Not Cells(bCount, 2) = """""
-"  Cells(aCount, 1) = ""     Domain"""
+Do While Not Cells(bCount, 2) = ""
+  Cells(aCount, 1) = "     Domain"
   Rows(i + 1).Insert Shift:=xlDown
   Rows(i + 1).Insert Shift:=xlDown
   Rows(i + 1).Insert Shift:=xlDown
@@ -72,8 +72,8 @@ Loop
 aCount = 2
 bCount = 1
 
-'Einfügen der Beschreibungen in Spalte B
-"Do While Not Cells(bCount, 2) = """""
+'EinfÃ¼gen der Beschreibungen in Spalte B
+Do While Not Cells(bCount, 2) = ""
     Cells(aCount, 2).Value = domain & Cells(bCount, 3) & hochkomma
 
     aCount = aCount + 1
@@ -88,7 +88,7 @@ bCount = 1
     bCount = bCount + 5
 Loop
 
-'Löschen der überflüssigen Informationen und Anpassung des Formats
-"Columns(""C:F"").Delete"
+'Löschen der Überflüssigen Informationen und Anpassung des Formats
+Columns("C:F").Delete
 
 End Sub
