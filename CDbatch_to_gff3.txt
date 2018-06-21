@@ -4,7 +4,7 @@
 'Reference Conserved Domain Search: Marchler-Bauer A, Bo Y, Han L, He J, Lanczycki CJ, Lu S, Chitsaz F, Derbyshire MK, Geer RC, 
 '                                   Gonzales NR, Gwadz M, Hurwitz DI, Lu F, Marchler GH, Song JS, Thanki N, Wang Z, Yamashita RA, 
 '                                   Zhang D, Zheng C, Geer LY, Bryant SH. CDD/SPARCLE: functional classification of proteins via 
-"'                                   subfamily domain architectures. Nucleic Acids Res. 2017 Jan 4;45(D1):D200-D203. "
+'                                   subfamily domain architectures. Nucleic Acids Res. 2017 Jan 4;45(D1):D200-D203. "
 '                                   doi: 10.1093/nar/gkw1129. Epub 2016 Nov 29.
 '
 'Website: https://www.ncbi.nlm.nih.gov/Structure/cdd/wrpsb.cgi
@@ -13,47 +13,47 @@ Sub CDbatch_to_gff3()
 Dim count1 As Integer
 count1 = 2
 
-"    Rows(""1:7"").Select"
+    Rows("1:7").Select
         Application.CutCopyMode = False
         Selection.Delete Shift:=xlUp
-"    Columns(""B:C"").Select"
+    Columns("B:C").Select
         Selection.Delete Shift:=xlToLeft
-"    Columns(""B:B"").Select"
+    Columns("B:B").Select
         Selection.Insert Shift:=xlToRight
         Selection.Insert Shift:=xlToRight
         Selection.Insert Shift:=xlToRight
         Selection.Insert Shift:=xlToRight
         Selection.Insert Shift:=xlToRight
-"    Columns(""I:I"").Select"
+    Columns("I:I").Select
         Selection.Insert Shift:=xlToRight
         Selection.Insert Shift:=xlToRight
         Selection.Insert Shift:=xlToRight
         Selection.Insert Shift:=xlToRight
         
-"    Do While Not Cells(count1, 1) = """""
-"        Cells(count1, 5) = ""."""
-"        Cells(count1, 6) = ""Domain"""
-"        Cells(count1, 9) = ""."""
-"        Cells(count1, 10) = ""+"""
-"        Cells(count1, 11) = ""."""
-"        Cells(count1, 12) = ""Name="" & Cells(count1, 16) & "";E-value="" & Cells(count1, 13) & "";Bitscore="" & Cells(count1, 14) & "";pfam="" & Cells(count1, 15)"
+    Do While Not Cells(count1, 1) = ""
+        Cells(count1, 5) = "."
+        Cells(count1, 6) = "Domain"
+        Cells(count1, 9) = "."
+        Cells(count1, 10) = "+"
+        Cells(count1, 11) = "."
+        Cells(count1, 12) = "Name=" & Cells(count1, 16) & ";E-value=" & Cells(count1, 13) & ";Bitscore=" & Cells(count1, 14) & ";pfam=" & Cells(count1, 15)
         count1 = count1 + 1
     Loop
     
-"    Columns(""A:A"").Select"
-"        Selection.TextToColumns Destination:=Range(""A1""), DataType:=xlDelimited, _"
+    Columns("A:A").Select
+        Selection.TextToColumns Destination:=Range(""A1""), DataType:=xlDelimited, _
         TextQualifier:=xlDoubleQuote, ConsecutiveDelimiter:=True, Tab:=False, _
         Semicolon:=False, Comma:=False, Space:=True, Other:=True, OtherChar:= _
-"        "">"", FieldInfo:=Array(Array(1, 1), Array(2, 1), Array(3, 1)), _"
+        ">", FieldInfo:=Array(Array(1, 1), Array(2, 1), Array(3, 1)), _
         TrailingMinusNumbers:=True
     
-"    Columns(""D:D"").Select"
+    Columns("D:D").Select
         Selection.Delete Shift:=xlToLeft
-"    Columns(""A:B"").Select"
+    Columns("A:B").Select
         Selection.Delete Shift:=xlToLeft
-"    Columns(""J:O"").Select"
+    Columns(""J:O"").Select
         Selection.Delete Shift:=xlToLeft
-"    Rows(""1:1"").Select"
+    Rows(""1:1"").Select
         Selection.Delete Shift:=xlUp
     
 End Sub
