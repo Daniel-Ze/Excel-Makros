@@ -51,9 +51,9 @@ count1 = 2
         Selection.Delete Shift:=xlToLeft
     Columns("A:B").Select
         Selection.Delete Shift:=xlToLeft
-    Columns(""J:O"").Select
+    Columns("J:O").Select
         Selection.Delete Shift:=xlToLeft
-    Rows(""1:1"").Select
+    Rows("1:1").Select
         Selection.Delete Shift:=xlUp
     
 End Sub
